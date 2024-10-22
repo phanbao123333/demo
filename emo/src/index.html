@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Đánh Giá và Nhận Xét</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 50%;
+      margin: 50px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 20px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    ul li {
+      background-color: #f9f9f9;
+      padding: 10px;
+      margin: 5px 0;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+
+    ul li:hover {
+      background-color: #e9e9e9;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      width: 50%;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .reviews-list {
+      margin-top: 30px;
+    }
+
+    .review {
+      background-color: #f9f9f9;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    .review h3 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .review p {
+      margin: 5px 0;
+    }
+  </style>
+  <body>
+    <div class="container">
+      <h1>Đánh Giá và Nhận Xét</h1>
+      <div class="review-form">
+        <h2>Viết nhận xét</h2>
+        <form id="reviewForm">
+          <label for="name">Tên:</label>
+          <input type="text" id="name" name="name" required />
+          <label for="rating">Đánh giá:</label>
+          <select id="rating" name="rating" required>
+            <option value="5">5 Sao</option>
+            <option value="4">4 Sao</option>
+            <option value="3">3 Sao</option>
+            <option value="2">2 Sao</option>
+            <option value="1">1 Sao</option>
+          </select>
+          <label for="review">Nhận xét:</label>
+          <textarea id="review" name="review" required></textarea>
+          <button type="submit">Gửi</button>
+        </form>
+      </div>
+      <div class="reviews-list">
+        <h2>Nhận xét gần đây</h2>
+        <div id="reviewsContainer">
+          <!-- Nhận xét sẽ hiển thị ở đây -->
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h1>Tìm Kiếm</h1>
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Nhập từ khóa..."
+        onkeyup="searchItems()"
+      />
+      <ul id="itemList">
+        <li>HTML cơ bản</li>
+        <li>CSS cho người mới bắt đầu</li>
+        <li>Học JavaScript</li>
+        <li>Lập trình Python cơ bản</li>
+        <li>ReactJS nâng cao</li>
+        <li>NodeJS và Express</li>
+        <li>Thiết kế web hiện đại</li>
+      </ul>
+    </div>
+
+    <script>
+      document
+        .getElementById("reviewForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const rating = document.getElementById("rating").value;
+          const review = document.getElementById("review").value;
+
+          const reviewContainer = document.createElement("div");
+          reviewContainer.classList.add("review");
+
+          const reviewTitle = document.createElement("h3");
+          reviewTitle.innerText = `${name} - ${rating} Sao`;
+
+          const reviewText = document.createElement("p");
+          reviewText.innerText = review;
+
+          reviewContainer.appendChild(reviewTitle);
+          reviewContainer.appendChild(reviewText);
+
+          document
+            .getElementById("reviewsContainer")
+            .appendChild(reviewContainer);
+
+          document.getElementById("reviewForm").reset();
+        });
+      function searchItems() {
+        let input = document.getElementById("searchInput").value.toLowerCase();
+        let items = document
+          .getElementById("itemList")
+          .getElementsByTagName("li");
+
+        for (let i = 0; i < items.length; i++) {
+          let item = items[i].innerText.toLowerCase();
+          if (item.includes(input)) {
+            items[i].style.display = "";
+          } else {
+            items[i].style.display = "none";
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
